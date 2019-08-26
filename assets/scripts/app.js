@@ -8,8 +8,10 @@
 
 const authEvents = require('./auth/events')
 const imagesEvents = require('./images/events')
+const albumsEvents = require('./albums/events')
 
 $(() => {
   authEvents.addHandlers()
   imagesEvents.addHandlers()
+  albumsEvents.addHandlers()
 })

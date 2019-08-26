@@ -1,0 +1,17 @@
+{{#each albums as |album|}}
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8 handlebar-card">
+      <form class='albumForm  Handlebar-Form' id="updateAlbumForm" data-id="{{album._id}}">
+        <label>Album Name</label><br/>
+        <input id="name" type="text" name="album[name]" value="{{album.name}}" placeholder="Name" required><br />
+        <button class="btn btn-primary update-submit">Submit please</button>
+      </form>
+      <br>
+      <h6>Date Created: {{album.createdAt}}</h6>
+      <h6>Date Modified: {{album.updatedAt}}</h6>
+  </div>
+  <div class="col-2"></div>
+</div>
+
+{{/each}}

@@ -1,0 +1,18 @@
+<div class="row">
+  {{#each albums as |album|}}
+    <div class="col-sm-6 row">
+      <div class="col-1"></div>
+      <div class="col-10 justify-content-center handlebar-card">
+        <section data-id="{{album._id}}">
+        <h5>Name: {{album.name}}</h5>
+        <h6>Date Created: {{album.createdAt}}</h6>
+        <h6>Date Modified: {{album.updatedAt}}</h6>
+      </section>
+      <button class="btn btn-primary update-album" data-id="{{album._id}}">Edit</button>
+      <button class="btn btn-danger delete-album" data-id="{{album._id}}">Delete</button>
+      <button class="btn btn-primary album-images" data-id="{{album._id}}">Show images</button>
+      </div>
+      <div class="col-1"></div>
+    </div>
+  {{/each}}
+</div>
