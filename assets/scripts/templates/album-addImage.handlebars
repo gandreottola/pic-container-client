@@ -1,0 +1,16 @@
+<div class="row">
+  {{#each albums as |album|}}
+    <div class="col-sm-6 row">
+      <div class="col-1"></div>
+      <div class="col-10 justify-content-center handlebar-card">
+        <section data-id="{{album._id}}">
+        <h5>Name: {{album.name}}</h5>
+        <h6>Date Created: {{album.createdAt}}</h6>
+        <h6>Date Modified: {{album.updatedAt}}</h6>
+      </section>
+        <button class="btn btn-primary-outline add-image" data-id="{{album._id}}">Add</button>
+      </div>
+      <div class="col-1"></div>
+    </div>
+  {{/each}}
+</div>

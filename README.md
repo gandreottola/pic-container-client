@@ -1,16 +1,16 @@
 # Chicken Pix: An Image Hosting Application
 
 ### Deployed Link
-<https://the-coherant-chickens.github.io/the-coherent-chickens-client/>
+<https://gandreottola.github.io/pic-container-client/>
 
 ### Heroku Link:
-<https://the-coherent-chickens-heroku.herokuapp.com/>
+<https://pic-container.herokuapp.com/>
 
 ### Back End Repo:
-https://github.com/the-coherant-chickens/the-coherent-chickens-express
+https://github.com/gandreottola/pic-container-server
 
 ### Front End Repo:
-https://github.com/the-coherant-chickens/the-coherent-chickens-client
+https://github.com/gandreottola/pic-container-client
 
 ### Authors (aka The Coherent Chickens):
 - ##### Lori Pinkham (@lpinkham) | *Project Lead / Product Lead*
@@ -58,6 +58,10 @@ Day 3
   - date modified
   - owner (user who uploaded the image)
   - tag
+- As a signed in user, I would like to crete an album.
+- As a signed in user, I would like to update the name of album.
+- As a signed in user, I would like to see all my created albums.
+- As a signed in user, I would like to delete the album.
 
 #### Initial Wire framing
 

@@ -1,6 +1,5 @@
 <div class="row">
   {{#each images as |image|}}
-    {{#if image.editable}}
     <div class="col-sm-6 row">
       <div class="col-1"></div>
       <div class="col-10 justify-content-center handlebar-card">
@@ -17,11 +16,8 @@
           </ul>
         <h6>Date Created: {{image.createdAt}}</h6>
         <h6>Date Modified: {{image.updatedAt}}</h6>
-        <button class="btn btn-primary update-image" data-update-image="{{image._id}}">Edit</button>
-        <button class="btn btn-primary-outline add-imageToAlbum" data-add-image="{{image._id}}">Add</button>
       </div>
       <div class="col-1"></div>
     </div>
-    {{/if}}
   {{/each}}
 </div>

@@ -2,6 +2,7 @@
 
 const store = require('./../store')
 const api = require('./api')
+const apiAlbum = require('./../albums/api')
 const ui = require('./ui')
 const getFormFields = require('./../../../lib/get-form-fields')
 
@@ -80,13 +81,25 @@ const onUpdateImage = event => {
     .catch(ui.updateImageFail)
 }
 
+const onAddImageToAlbum = event => {
+  event.preventDefault()
+
+  const imageId = $(event.target).data('add-image')
+  const currentImage = store.images.find(image => imageId === image._id)
+  store.currentImage = currentImage
+
+  apiAlbum.indexAlbums()
+    .then(ui.addImageToAlbumSuccessful)
+    .catch(ui.failure)
+}
+
 const addHandlers = () => {
   $('#show-create').on('click', function () {
     $('#imageUploadForm').show()
     $('#show-images').show()
     $('#show-my-images').show()
     $('#show-create').hide()
-    $('#images-content').html('')
+    $('.images-content').html('')
     $('#cancel-delete').hide()
     $('#show-delete').hide()
     $('#show-update').hide()
@@ -141,6 +154,7 @@ const addHandlers = () => {
   })
   $('body').on('click', '.update-image', onSelectImageEdit)
   $('body').on('submit', '#imageUpdateForm', onUpdateImage)
+  $('body').on('click', '.add-imageToAlbum', onAddImageToAlbum)
 }
 
 module.exports = {

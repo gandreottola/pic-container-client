@@ -58,7 +58,7 @@ const addHandlers = () => {
     $('#signIn').show()
     $('#signUp').show()
     // $('#changePassword').hide()
-    $('#images-content').html('')
+    $('.images-content').html('')
   })
 }
 

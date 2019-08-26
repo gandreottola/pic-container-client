@@ -5,15 +5,16 @@ const showImagesTemplate = require('../templates/image-listing.handlebars')
 const deleteImageTemplate = require('../templates/delete-image.handlebars')
 const updateImageTemplate = require('../templates/update-image.handlebars')
 const getImageTemplate = require('../templates/choose-image.handlebars')
+const addImageToAlbum = require('../templates/album-addImage.handlebars')
 
 const successMessage = message => {
-  $('#user-status').text(message).fadeIn(1000)
+  $('#user-status').text(message).show()
   $('#user-status').addClass('success')
   $('#user-status').removeClass('failure')
 
   // clear forms
   $('form').trigger('reset')
-  $('#user-status').text(message).fadeOut(3000)
+  $('#user-status').fadeOut(3000)
 }
 
 const failureMessage = message => {
@@ -31,7 +32,7 @@ const imageUploadSuccessful = responseData => {
     return store.user.email.split('@')[0]
   }
   const showImagesHtml = showImagesTemplate({images: responseData})
-  $('#images-content').html(showImagesHtml)
+  $('.images-content').html(showImagesHtml)
   $('form').trigger('reset')
   $('#imageUploadForm').hide()
 }
@@ -42,7 +43,7 @@ const imageUploadFailure = function () {
 
 const indexImagesSuccess = responseData => {
   store.images = responseData.images
-  $('#images-content').html('')
+  $('.images-content').html('')
   let showImagesHtml
   if (store.images.length) {
     let i
@@ -53,7 +54,7 @@ const indexImagesSuccess = responseData => {
   } else {
     showImagesHtml = '<h3>Looks like your album is empty - try adding images!</h3>'
   }
-  $('#images-content').append(showImagesHtml)
+  $('.images-content').append(showImagesHtml)
 }
 
 const indexImagesFailure = function () {
@@ -62,7 +63,7 @@ const indexImagesFailure = function () {
 
 const viewMyImagesSuccess = responseData => {
   const images = responseData.images
-  $('#images-content').html('')
+  $('.images-content').html('')
   $('#imageUploadForm').hide()
   $('#show-create').show()
   let ownedImages = []
@@ -82,7 +83,7 @@ const viewMyImagesSuccess = responseData => {
       return '<h3>User has no Cluckin\' images! Cluck That!<h3>'
     }
   }
-  $('#images-content').append(imagesHtml)
+  $('.images-content').append(imagesHtml)
   $('.update-image').hide()
 }
 
@@ -92,7 +93,7 @@ const viewMyImagesFail = function () {
 
 const setDeleteStateSuccess = responseData => {
   const images = responseData.images
-  $('#images-content').html('')
+  $('.images-content').html('')
   $('#imageUploadForm').hide()
   $('#show-create').show()
   let ownedImages = 0
@@ -106,7 +107,7 @@ const setDeleteStateSuccess = responseData => {
   }
   const imagesHtml = ownedImages ? deleteImageTemplate({ images: images }) : '<h3>Looks like you\'re a bit ahead of yourself! No images available to Delete.<h1>'
 
-  $('#images-content').append(imagesHtml)
+  $('.images-content').append(imagesHtml)
 }
 
 const setDeleteStateFail = function () {
@@ -115,7 +116,7 @@ const setDeleteStateFail = function () {
 
 const deleteImageSuccess = () => {
   successMessage('Successfully deleted Image')
-  $('#images-content').html('')
+  $('.images-content').html('')
   $('#show-delete').hide()
   $('#cancel-delete').hide()
   $('#show-images').show()
@@ -127,7 +128,7 @@ const deleteImageFail = function () {
 
 const setUpdateSuccess = responseData => {
   const images = responseData.images
-  $('#images-content').html('')
+  $('.images-content').html('')
   $('#imageUploadForm').hide()
   $('#show-edit').show()
   let ownedImages = 0
@@ -147,7 +148,7 @@ const setUpdateSuccess = responseData => {
       return '<h3>Your album is empty! Get some images.<h3>'
     }
   }
-  $('#images-content').append(imagesHtml)
+  $('.images-content').append(imagesHtml)
 }
 const setUpdateFail = function () {
   failureMessage('Unable to Update Image')
@@ -156,7 +157,7 @@ const setUpdateFail = function () {
 const updateImageSuccess = responseData => {
   successMessage('Successfully updated Image')
 
-  $('#images-content').html('')
+  $('.images-content').html('')
   $('#show-images').show()
   $('#show-my-images').show()
   $('#cancel-delete').hide()
@@ -174,11 +175,24 @@ const getImageSuccess = responseData => {
   }
   const imagesHtml = getImageTemplate({ images: responseData })
 
-  $('#images-content').html(imagesHtml)
+  $('.images-content').html(imagesHtml)
 }
 
 const getImageFail = function () {
   failureMessage('Unable to get Image')
+}
+
+const addImageToAlbumSuccessful = responseData => {
+  successMessage('Pick Album To Add Image')
+  store.albums = responseData.albums
+
+  const albums = responseData.albums.filter(album =>
+    album.owner === store.user._id
+  )
+
+  const imageToAlbumHtml = addImageToAlbum({ albums: albums })
+
+  $('.albums-content').html(imageToAlbumHtml)
 }
 
 module.exports = {
@@ -197,5 +211,6 @@ module.exports = {
   getImageSuccess,
   getImageFail,
   viewMyImagesSuccess,
-  viewMyImagesFail
+  viewMyImagesFail,
+  addImageToAlbumSuccessful
 }

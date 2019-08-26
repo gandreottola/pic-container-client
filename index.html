@@ -19,7 +19,7 @@
           <h3 id="user-status" class="head"></h3>
 
 
-          <section id="images-content">
+          <section class="images-content albums-content">
             <div class="home-page-content">
             <p> Chicken Pic's is an app that will allow you to upload photo's.
                Add tags to each image to keep track of important infomation for each image.</p>
@@ -131,6 +131,19 @@
               <input type="file" name="file" required>
               <label>Add comma seperated tags!</label>
               <input id="tag" type="text" name="tag" placeholder="Tags field">
+              <button class="btn btn-primary" type="submit">Submit please</button>
+            </form>
+
+            <div class='Album-Functions'>
+              <button id="album-create" class="btn btn-primary col-mb-3">New Album</button>
+              <br>
+              <button id="show-my-albums" class="btn btn-primary col-mb-3">See Your Albums</button>
+              <br>
+              <!-- <button id="cancel-delete" class="btn btn-primary col-mb-3">CANCEL</button> -->
+            </div>
+
+            <form class='albumForm' id="albumForm">
+              <input id="name" type="text" name="album[name]" placeholder="Name">
               <button class="btn btn-primary" type="submit">Submit please</button>
             </form>
           </div>

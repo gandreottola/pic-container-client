@@ -41,6 +41,9 @@ const signInSuccessful = responseData => {
   $('#SignUp').addClass('collapse')
   $('#SignInToggle').removeClass('show')
   $('.Image-Functions').show()
+  $('.album-Functions').show()
+  $('#show-my-albums').show()
+  $('#album-create').show()
   // $('#SignOutToggle').show()
   $('#SignOut').removeClass('collapse')
 }
@@ -61,10 +64,13 @@ const signOutSuccessful = responseData => {
   $('#SignOut').addClass('collapse')
   $('#SignOutToggle').addClass('collapse')
   $('#SignOutToggle').removeClass('show')
-  $('#images-content').html('')
-  $('.Image-Functions').hide()
+  $('.images-content').html('')
+  $('.album-Functions').hide()
   $('#cancel-delete').hide()
   $('#show-images').hide()
+  $('#show-my-images').hide()
+  $('#show-my-albums').hide()
+  $('#album-create').hide()
   $('#user-status').html('')
 }
 
