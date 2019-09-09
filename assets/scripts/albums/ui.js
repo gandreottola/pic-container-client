@@ -67,15 +67,10 @@ const updateAlbumSuccessful = responseData => {
   successMessage('Successfully Updated Album')
 
   $('.albums-content').html('')
-  // $('#show-images').show()
-  // $('#show-my-images').show()
-  // $('#cancel-delete').hide()
-  // $('#show-delete').hide()
 }
 
 const deleteAlbumSuccessful = responseData => {
   successMessage('Successfully Deleted Album')
-  // debugger
 
   const leftOverAlbums = responseData.albums.filter(album =>
     album.owner === store.user._id
@@ -86,14 +81,25 @@ const deleteAlbumSuccessful = responseData => {
 }
 
 const showAlbumImagesSuccessful = (responseData) => {
-  successMessage('Images Stored In Album')
-  // debugger
+  if (responseData.images.length === 0) {
+    successMessage('You Have No Images In Album')
+  } else {
+    successMessage('Images Stored In Album')
+  }
+
   const showAlbumImagesHtml = albumImagesTemplate({images: responseData.images})
   $('.albums-content').html(showAlbumImagesHtml)
 }
 
 const addImageSuccessful = () => {
   successMessage('Successfully Added Image')
+}
+
+const removeAlbumImageSuccessful = () => {
+  successMessage('Successfully Removed Image')
+
+  const showAlbumImagesHtml = albumImagesTemplate({images: store.currentAlbum.images})
+  $('.albums-content').html(showAlbumImagesHtml)
 }
 
 module.exports = {
@@ -104,5 +110,6 @@ module.exports = {
   deleteAlbumSuccessful,
   failure,
   showAlbumImagesSuccessful,
-  addImageSuccessful
+  addImageSuccessful,
+  removeAlbumImageSuccessful
 }

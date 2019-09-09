@@ -58,17 +58,15 @@ const onDeleteAlbum = event => {
 
 const onAddImage = event => {
   event.preventDefault()
-  // debugger
+
   const albumId = $(event.target).data('id')
   const currentAlbum = store.albums.find(album => albumId === album._id)
 
   currentAlbum.images.push(store.currentImage)
-  store.currentAlbum = currentAlbum
-  store.albums = store.current.currentAlbum
 
   const formData = {
     album: {
-      images: store.currentImage
+      images: currentAlbum.images
     }
   }
 
@@ -79,45 +77,62 @@ const onAddImage = event => {
 
 const onShowAlbumImages = event => {
   event.preventDefault()
-  // debugger
 
-  // const albumId = $(event.target).data('id')
-  // const currentAlbum = store.albums.find(album => albumId === album._id)
+  const albumId = $(event.target).data('id')
+  store.albumId = albumId
+  const currentAlbum = store.albums.find(album => albumId === album._id)
+  store.currentAlbum = currentAlbum
 
-  // ui.showAlbumImagesSuccessful(store.currentAlbum)
+  ui.showAlbumImagesSuccessful(currentAlbum)
+}
+
+const onRemoveAlbumImage = event => {
+  event.preventDefault()
+
+  const imageId = $(event.target).data('remove-image')
+  const currentAlbum = store.albums.find(album => store.albumId === album._id)
+
+  for (let i = 0; i < currentAlbum.images.length; i++) {
+    if (currentAlbum.images[i]._id === imageId) {
+      currentAlbum.images.splice(i, 1)
+    }
+  }
+  const formData = {
+    album: {
+      images: currentAlbum.images
+    }
+  }
+  store.currentAlbum = currentAlbum
+
+  api.updateAlbum(store.albumId, formData)
+    .then(ui.removeAlbumImageSuccessful)
+    .catch(ui.failure)
 }
 
 const addHandlers = () => {
   $('#album-create').on('click', function () {
     $('#albumForm').show()
-    // $('#show-images').show()
-    // $('#show-my-images').show()
     $('#album-create').hide()
-    // $('.images-content').html('')
-    // $('#cancel-delete').hide()
-    // $('#show-delete').hide()
-    // $('#show-update').hide()
+    $('.cancel').show()
   }).hide()
   $('#albumForm').on('submit', onCreateAlbum).hide()
   $('#albumForm').on('submit', function () {
     $('#album-create').show()
-    // $('#show-images').show()
+    $('.cancel').hide()
   }).hide()
   $('#show-my-albums').on('click', onIndexAlbums).hide()
-  $('#show-my-albums').on('click', function () {
-    // $('#cancel-delete').hide()
-    // $('#imageUploadForm').hide()
-    // $('#show-my-images').hide()
-    // $('#show-create').show()
-    // $('#show-delete').show()
-    // $('#show-images').show()
-    // $('#show-update').show()
+  $('.cancel').on('click', function () {
+    $('#albumForm').hide()
+    $('#album-create').show()
+    $('.cancel').hide()
   })
   $('body').on('click', '.update-album', onSelectAlbumEdit)
   $('body').on('submit', '#updateAlbumForm', onUpdateAlbum)
+  $('body').on('click', '.cancel-update', onIndexAlbums)
   $('body').on('click', '.delete-album', onDeleteAlbum)
   $('body').on('click', '.add-image', onAddImage)
   $('body').on('click', '.album-images', onShowAlbumImages)
+  $('body').on('click', '.remove-album-image', onRemoveAlbumImage)
 }
 
 module.exports = {
