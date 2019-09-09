@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Chicken Pix</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+      <link href="https://fonts.googleapis.com/css?family=Beth+Ellen|Questrial&display=swap" rel="stylesheet">
+    </head>
+    <body class=".container-fluid">
+      <div class="row d-flex flex-row-reverse">
+        <main class="col-sm-9">
+
+          <h3 id="user-status" class="head"></h3>
+
+
+          <section class="images-content albums-content">
+            <div class="home-page-content">
+            <p> Chicken Pic's is an app that will allow you to upload photo's.
+               Add tags to each image to keep track of important infomation for each image.</p>
+            </div>
+          </section>
+
+        </main>
+        <aside class="col-sm-3 row">
+          <div class="col-1"></div>
+          <div class="col-10">
+            <div id="message"></div>
+            <h1>Chicken Pix</h1>
+
+            <h3>Get started!</h3>
+            <div id="accordion">
+              <div class="card">
+                <div class="card-header" id="SignUp">
+                  <h5 class="mb-0">
+                    <button class="btn" data-toggle="collapse" data-target="#SignUpToggle" aria-expanded="true" aria-controls="SignUpToggle">
+                      Sign Up
+                    </button>
+                  </h5>
+                </div>
+
+
+                <div id="SignUpToggle" class="collapse" aria-labelledby="SignUp" data-parent="#accordion">
+                  <div class="card-body">
+                    <form id="signUp">
+                      <input type="email" name="credentials[email]" placeholder="Email">
+                      <input type="password" name="credentials[password]" placeholder="Password">
+                      <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
+                      <button class="submit" type="submit">Sign up</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="SignIn">
+                  <h5 class="mb-0">
+                    <button id="sign-in" class="btn" data-toggle="collapse" data-target="#SignInToggle" aria-expanded="false" aria-controls="SignInToggle">
+                      Sign In
+                    </button>
+                  </h5>
+                </div>
+                <div id="SignInToggle" class="collapse" aria-labelledby="SignIn" data-parent="#accordion">
+                  <div class="card-body">
+                    <form id="signIn">
+                      <input type="email" name="credentials[email]" placeholder="Email">
+                      <input type="password" name="credentials[password]" placeholder="Password">
+                      <button class="submit" type="submit">Sign in</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="ChangePassword">
+                  <h5 class="mb-0">
+                    <button id="passwordButton" class="btn collapse" data-toggle="collapse" data-target="#ChangePasswordToggle" aria-expanded="true" aria-controls="ChangePasswordToggle">
+                      Change Password
+                    </button>
+                  </h5>
+                </div>
+
+                <div id="ChangePasswordToggle" class="collapse" aria-labelledby="ChangePassword" data-parent="#accordion">
+                  <div class="card-body">
+                    <form id="changePassword">
+                      <input type="password" name="passwords[old]" placeholder="Current Password">
+                      <input type="password" name="passwords[new]" placeholder="New Password">
+                      <button class="submit" type="submit">Change Password</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header" id="SignOut">
+                  <h5 class="mb-0">
+                    <button id="signOutButton" class="btn collapse" data-toggle="collapse" data-target="#SignOutToggle" aria-expanded="true" aria-controls="SignOutToggle">
+                      Sign Out
+                    </button>
+                  </h5>
+                </div>
+
+                <div id="SignOutToggle" class="collapse" aria-labelledby="SignOut" data-parent="#accordion">
+                  <div class="card-body">
+                    <form id="signOut">
+                      <button class="submit" type="submit">Sign Out</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='Image-Functions'>
+              <button id="show-create" class="btn btn-primary col-mb-3">Upload New Image</button>
+              <br>
+              <button id="show-images" class="btn btn-primary col-mb-3">View All Images</button>
+              <br>
+              <button id="show-my-images" class="btn btn-primary col-mb-3">See Your Images</button>
+              <br>
+              <button id="show-update" class="btn btn-primary col-mb-3">Update Your Images</button>
+              <br>
+              <button id="show-delete" class="btn btn-primary col-mb-3">Delete Your Images</button>
+              <br>
+              <button id="cancel-delete" class="btn btn-primary col-mb-3">CANCEL</button>
+            </div>
+
+            <form class='ImageUploadForm' id="imageUploadForm" enctype="multipart/form-data">
+              <input type="file" name="file" required>
+              <label>Add comma seperated tags!</label>
+              <input id="tag" type="text" name="tag" placeholder="Tags field">
+              <button class="btn btn-primary" type="submit">Submit please</button>
+            </form>
+
+            <div class='Album-Functions'>
+              <button id="album-create" class="btn btn-primary col-mb-3">New Album</button>
+              <br>
+              <button id="show-my-albums" class="btn btn-primary col-mb-3">See Your Albums</button>
+              <br>
+              <!-- <button id="cancel-delete" class="btn btn-primary col-mb-3">CANCEL</button> -->
+            </div>
+
+            <form class='albumForm' id="albumForm">
+              <input id="name" type="text" name="album[name]" placeholder="Name">
+              <button class="btn btn-primary" type="submit">Submit please</button>
+            </form>
+            <button class="btn btn-primary cancel" style="display: none;">Cancel</button>
+          </div>
+          <div class="col-1"></div>
+        </aside>
+      </div>
+
+    </body>
+</html>
